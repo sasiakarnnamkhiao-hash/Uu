@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ta Ray - Welcome to my shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 🎮 ปรับโทนสีใหม่ให้เข้ากับร้านขายไอดีเกม (Dark/Gaming Theme) 🎮 */
+            --primary-bg: #121212; /* พื้นหลังสีดำเข้ม */
+            --box-bg: rgba(30, 30, 35, 0.75);
+            --white: #ffffff;
+            --pink-accent: #e50914; /* เปลี่ยนชมพูเป็น แดงดุดัน (Accent) */
+            --blue-accent: #f1c40f; /* สีเหลืองทอง */
+            --text-dark: #f5f6fa; /* สีข้อความหลักในกล่อง */
+            --text-light: #dcdde1; /* สีข้อความรอง */
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--white);
+            background-image: none; /* เอาลายพื้นหลังเดิมออกเพื่อความเท่ */
+            overflow-x: hidden;
+        }
+
+        .font-mitr { font-family: 'Mitr', sans-serif; }
+        .font-eng { font-family: 'Nunito', sans-serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--primary-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--pink-accent); border-radius: 10px; }
+
+        /* Patterns and Decorative Elements (Dimmed for dark theme) */
+        .checker-bg { opacity: 0.05 !important; }
+        .right-dash-border { border-right: 3px dashed rgba(229, 9, 20, 0.3); }
+
+        .glass-panel {
+            background: var(--box-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        /* 🔴 Dark Theme Overrides สำหรับ Class ของ Tailwind เดิม 🔴 */
+        .white-window {
+            background: #1e1e24 !important;
+            border: 2px solid #333 !important;
+            color: var(--text-dark) !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .window-header {
+            background-color: #25252b !important;
+            border-bottom: 2px solid #333 !important;
+        }
+
+        /* เปลี่ยนสีข้อความชมพูเดิมให้เป็นสีขาว/เทา/แดง */
+        .text-\[\#8c5a65\], .text-\[\#b86b7d\], .text-\[\#b07d89\], .text-\[\#e07a8f\], .text-\[\#ff8fa3\] {
+            color: #f5f6fa !important;
+        }
+        .text-\[\#ff9eaa\] { color: #e50914 !important; }
+
+        /* เปลี่ยนพื้นหลังกล่องย่อยเป็นสีเทาเข้ม */
+        .bg-\[\#fff0f3\], .bg-\[\#fffafb\], .bg-\[\#ffe8d6\], .bg-red-50, .bg-\[\#fff0f4\], .bg-rose-100 {
+            background-color: #2b2b36 !important;
+            border-color: #444 !important;
+            color: #f5f6fa !important;
+        }
+        
+        /* เปลี่ยนสีข้อความเน้นคำ */
+        .text-\[\#b5734c\], .text-red-600, .text-pink-600, .text-rose-600, .text-\[\#d48c6a\], .text-rose-700 {
+            color: #e50914 !important; 
+        }
+        .text-pink-500 { color: #f1c40f !important; }
+
+        /* เปลี่ยนสีขอบ */
+        .border-\[\#ff9eaa\], .border-\[\#ffdce3\], .border-pink-200, .border-red-100, .border-rose-200, .border-\[\#ffcdb2\] {
+            border-color: #444 !important;
+        }
+
+        .pill-tag {
+            border-radius: 9999px;
+            padding: 0.25rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            color: white;
+            display: inline-block;
+        }
+
+        .bg-pink-tag { background-color: var(--pink-accent) !important; }
+        .bg-blue-tag { background-color: var(--blue-accent) !important; color: #000 !important; }
+        .bg-purple-tag { background-color: #3742fa !important; }
+
+        .star-icon {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="%23444" xmlns="http://www.w3.org/2000/svg"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>') no-repeat center;
+        }
+
+        .floating { animation: float 4s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.3; transform: scale(1.2) rotate(5deg); }
+        }
+        .animate-twinkle { animation: twinkle 4s ease-in-out infinite; }
+        .delay-100 { animation-delay: 1s; }
+        .delay-300 { animation-delay: 2s; }
+        .delay-700 { animation-delay: 3s; }
+        
+        /* ลดความสว่างของไอคอนตกแต่งพื้นหลัง */
+        .text-\[\#ffffff\], .text-\[\#ffb5c6\], .text-\[\#ff8fa3\] { color: #333 !important; opacity: 0.3 !important; }
+
+        .avatar-frame {
+            background-color: #1e1e24 !important;
+            border: 4px solid #e50914 !important;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .link-item {
+            display: inline-block;
+            background: #2b2b36 !important;
+            color: var(--text-light) !important;
+            padding: 0.4rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            margin-right: 0.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: 1px solid #444 !important;
+        }
+        .link-item:hover {
+            background: var(--pink-accent) !important;
+            color: white !important;
+            transform: scale(1.02);
+            border-color: var(--pink-accent) !important;
+        }
+
+        .contact-btn {
+            background-color: var(--pink-accent) !important;
+            color: white;
+            border-radius: 9999px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+            border: 2px solid var(--pink-accent) !important;
+            text-decoration: none;
+        }
+        .contact-btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body class="font-mitr min-h-screen pb-20">
+
+    <div class="right-dash-border hidden md:block"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-32 checker-bg hidden md:block opacity-30 z-0"></div>
+
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <div class="absolute top-[10%] left-[5%] w-8 h-8 md:w-10 md:h-10 animate-twinkle opacity-60 text-[#ffffff]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg></div>
+        <div class="absolute top-[25%] left-[10%] w-10 h-10 floating delay-300 opacity-70 text-white hidden md:block"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 19c2.48 0 4.5-2.02 4.5-4.5S19.98 10 17.5 10c-.34 0-.67.04-1 .11C15.68 7.18 13.06 5 10 5c-3.87 0-7 3.13-7 7 0 .58.08 1.14.21 1.68C1.35 14.23 0 15.96 0 18c0 2.76 2.24 5 5 5h12.5z"/></svg></div>
+        <div class="absolute top-[45%] left-[8%] w-12 h-12 floating delay-700 opacity-80 text-[#ffffff]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12,22C7,22 3,18 3,13C3,9.5 5,6.5 8,5V3C8,1.9 8.9,1 10,1C11.1,1 12,1.9 12,3V3.5C12,3.5 12,3.5 12,3.5V3C12,1.9 12.9,1 14,1C15.1,1 16,1.9 16,3V5C19,6.5 21,9.5 21,13C21,18 17,22 12,22M9,13A1.5,1.5 0 0,0 7.5,14.5A1.5,1.5 0 0,0 9,16A1.5,1.5 0 0,0 10.5,14.5A1.5,1.5 0 0,0 9,13M15,13A1.5,1.5 0 0,0 13.5,14.5A1.5,1.5 0 0,0 15,16A1.5,1.5 0 0,0 16.5,14.5A1.5,1.5 0 0,0 15,13Z"/></svg></div>
+        <div class="absolute top-[65%] left-[15%] w-6 h-6 animate-twinkle delay-100 opacity-60 text-white hidden md:block"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+        <div class="absolute top-[85%] left-[5%] w-9 h-9 floating opacity-70 text-[#ffb5c6]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A3,3 0 0,0 9,5C9,7.5 12,10 12,10C12,10 15,7.5 15,5A3,3 0 0,0 12,2M12,22A3,3 0 0,0 15,19C15,16.5 12,14 12,14C12,14 9,16.5 9,19A3,3 0 0,0 12,22M4.5,7.5A3,3 0 0,0 2,10.2C2,12.5 5.5,13.5 5.5,13.5C5.5,13.5 7.5,10.5 7,8A3,3 0 0,0 4.5,7.5M19.5,7.5A3,3 0 0,0 17,8C16.5,10.5 18.5,13.5 18.5,13.5C18.5,13.5 22,12.5 22,10.2A3,3 0 0,0 19.5,7.5M4.5,16.5A3,3 0 0,0 7,16C7.5,13.5 5.5,10.5 5.5,10.5C5.5,10.5 2,11.5 2,13.8A3,3 0 0,0 4.5,16.5M19.5,16.5A3,3 0 0,0 22,13.8C22,11.5 18.5,10.5 18.5,10.5C18.5,10.5 16.5,13.5 17,16A3,3 0 0,0 19.5,16.5Z"/></svg></div>
+        
+        <div class="absolute top-[15%] right-[8%] w-10 h-10 md:w-12 md:h-12 floating opacity-70 text-[#ffb5c6]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A3,3 0 0,0 9,5C9,7.5 12,10 12,10C12,10 15,7.5 15,5A3,3 0 0,0 12,2M12,22A3,3 0 0,0 15,19C15,16.5 12,14 12,14C12,14 9,16.5 9,19A3,3 0 0,0 12,22M4.5,7.5A3,3 0 0,0 2,10.2C2,12.5 5.5,13.5 5.5,13.5C5.5,13.5 7.5,10.5 7,8A3,3 0 0,0 4.5,7.5M19.5,7.5A3,3 0 0,0 17,8C16.5,10.5 18.5,13.5 18.5,13.5C18.5,13.5 22,12.5 22,10.2A3,3 0 0,0 19.5,7.5M4.5,16.5A3,3 0 0,0 7,16C7.5,13.5 5.5,10.5 5.5,10.5C5.5,10.5 2,11.5 2,13.8A3,3 0 0,0 4.5,16.5M19.5,16.5A3,3 0 0,0 22,13.8C22,11.5 18.5,10.5 18.5,10.5C18.5,10.5 16.5,13.5 17,16A3,3 0 0,0 19.5,16.5Z"/></svg></div>
+        <div class="absolute top-[30%] right-[15%] w-9 h-9 animate-twinkle delay-100 opacity-70 text-[#ffb5c6] hidden md:block"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5,4C20.5,3.9 19.3,4 18.3,4.5C17,5.1 16,6.1 15.2,7.2C14.2,5.8 12.6,4.5 10.9,4.4C9.6,4.3 8.3,4.7 7.5,5.6C6.1,7.1 6,9.6 7,11.4L3.1,19.3C2.9,19.6 3,20.1 3.4,20.4C3.8,20.6 4.3,20.4 4.5,20.1L9,13C10,13.8 11.2,14.4 12.5,14.4C13.8,14.4 15,13.8 16,13L20.5,20.1C20.7,20.4 21.2,20.6 21.6,20.4C22,20.1 22.1,19.6 21.9,19.3L18,11.4C19,9.6 18.9,7.1 17.5,5.6C18.4,5 19.6,4.7 20.7,5.1C21.1,5.2 21.6,5 21.7,4.6C21.9,4.3 21.7,3.8 21.5,4Z"/></svg></div>
+        <div class="absolute top-[55%] right-[10%] w-8 h-8 md:w-10 md:h-10 floating delay-300 opacity-60 text-[#ffffff]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg></div>
+        <div class="absolute top-[75%] right-[18%] w-10 h-10 animate-twinkle opacity-60 text-white hidden md:block"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 19c2.48 0 4.5-2.02 4.5-4.5S19.98 10 17.5 10c-.34 0-.67.04-1 .11C15.68 7.18 13.06 5 10 5c-3.87 0-7 3.13-7 7 0 .58.08 1.14.21 1.68C1.35 14.23 0 15.96 0 18c0 2.76 2.24 5 5 5h12.5z"/></svg></div>
+        <div class="absolute top-[90%] right-[8%] w-7 h-7 floating delay-700 opacity-60 text-[#ffb5c6]"><svg class="w-full h-full drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+
+        <div class="absolute top-[20%] left-[25%] text-sm animate-twinkle delay-700 opacity-50 text-[#ff8fa3] hidden md:block">✦</div>
+        <div class="absolute top-[15%] right-[25%] text-sm animate-twinkle delay-300 opacity-50 text-[#ff8fa3] hidden md:block">✦</div>
+        <div class="absolute bottom-[20%] left-[30%] text-sm animate-twinkle delay-100 opacity-50 text-[#ff8fa3] hidden md:block">✦</div>
+        <div class="absolute bottom-[15%] right-[30%] text-sm floating opacity-50 text-[#ff8fa3] hidden md:block">✦</div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4 pt-12 relative z-10">
+        
+        <div class="text-center mb-8 relative">
+            <div class="inline-flex flex-col items-center justify-center mb-2">
+                <div class="bg-pink-tag text-white font-eng text-2xl font-black w-12 h-12 rounded-2xl flex items-center justify-center mb-2 shadow-sm rotate-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </div>
+            </div>
+            
+            <h1 class="font-eng text-4xl md:text-5xl font-black tracking-wider text-[#8c5a65] drop-shadow-sm mb-4 flex items-center justify-center gap-3">
+                <svg class="w-8 h-8 text-[#ffffff]" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+                TA RAY
+            </h1>
+            
+            <div class="flex flex-wrap justify-center gap-3 font-eng">
+                <span class="pill-tag bg-pink-tag">welcome to my shop</span>
+                <span class="pill-tag bg-purple-tag">consignment</span>
+                <span class="pill-tag bg-blue-tag">id finder</span>
+            </div>
+        </div>
+
+        <div class="glass-panel p-4 md:p-8 relative">
+            <div class="star-icon top-4 left-4"></div>
+            <div class="star-icon bottom-4 right-4"></div>
+
+            <div class="flex flex-col md:flex-row gap-6 mb-8 relative z-10">
+                
+                <div class="shrink-0 mx-auto md:mx-0 floating">
+                    <div class="avatar-frame w-48 h-56 flex flex-col items-center justify-center">
+                        <div class="absolute -right-4 top-1/2 bg-white text-gray-400 p-1 rounded-full shadow-md">
+                            <svg class="w-6 h-6 text-pink-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <img src="IMG_7201.jpeg" alt="Profile" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                </div>
+
+                <div class="flex-1 text-[#8c5a65]">
+                    <p class="font-eng font-bold text-lg text-[#b07d89] uppercase tracking-widest mb-1">Hello! I'm</p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <h2 class="font-eng text-4xl font-black text-[#8c5a65]">TA RAY</h2>
+                        <span class="border-2 border-[#ff9eaa] text-[#ff9eaa] rounded-full px-3 py-1 text-xs font-bold font-eng">SHOP</span>
+                    </div>
+                    
+                    <div class="border-l-4 border-[#ff9eaa] pl-4 py-1 mb-6">
+                        <p class="text-lg leading-relaxed font-mitr font-medium">
+                            ร้าน Ta Ray รับฝากขาย<br>
+                            รับทำป้ายฝากขาย ป้ายเรทต่างๆ ป้ายคิวอาร์ ปกเครดิต <br><svg class="w-4 h-4 inline-block text-[#ff9eaa] mx-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg> ป้ายไอดียังไม่รับทำและรับหาไอดี
+                        </p>
+                    </div>
+
+                    <div class="white-window max-w-sm mt-4 p-4 transform md:translate-x-10 hover:translate-y-1 transition-transform">
+                        <div class="space-y-2 font-mitr text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="flex items-center gap-2"><div class="w-2 h-2 bg-[#ffcdb2] rounded-sm"></div> <b>SERVICES:</b></span>
+                                <span>ฝากขาย & รับหาไอดี</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="flex items-center gap-2"><div class="w-2 h-2 bg-[#ff9eaa] rounded-sm"></div> <b>BASE PRICE:</b></span>
+                                <span>เริ่มต้น 15 THB</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[#b07d89]">
+                                <span class="flex items-center gap-2"><div class="w-2 h-2 bg-gray-200 rounded-sm"></div> <b>STATUS:</b></span>
+                                <span>Open for orders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                
+                <div class="space-y-6">
+                    
+                    <div class="white-window">
+                        <div class="window-header">
+                            <div class="flex gap-1.5 mr-auto">
+                                <div class="w-3 h-3 rounded-full bg-[#ffb5c6]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#ffcdb2]"></div>
+                                <div class="w-3 h-3 rounded-full bg-pink-200"></div>
+                            </div>
+                            <span class="font-eng font-bold text-[#e07a8f] tracking-widest text-xs">CONSIGNMENT RATES</span>
+                        </div>
+                        <div class="p-5 font-mitr text-sm">
+                            <h3 class="font-bold text-lg mb-2 text-[#b86b7d] flex items-center">TABAY (ร้านตาเรย์) เรทราคาฝากขาย <svg class="w-5 h-5 text-[#e07a8f] ml-2" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></h3>
+                            
+                            <div class="mb-4 text-center">
+                                <img src="att.qinRJRdZk5uRPfzTV5LLWtC3_BvNc47dYtI2am68Mtc.jpeg" alt="เรทราคาฝากขาย" class="w-full rounded-lg border-2 border-[#444] shadow-md object-cover">
+                            </div>
+
+                            <ul class="space-y-2 mb-4 list-none">
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 500 – 900</span> <span>15 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 1000 – 1499</span> <span>25 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 1500 – 1999</span> <span>30 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 2000 – 2499</span> <span>45 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 2500 – 4499</span> <span>57 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 4500 – 5999</span> <span>65 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 6000 – 7500</span> <span>80 B</span></li>
+                                <li class="flex justify-between items-center"><span class="text-[#ff9eaa]">✦ 7501 – 8500</span> <span>95 B</span></li>
+                            </ul>
+                            
+                            <h3 class="font-bold text-lg mb-2 text-[#b86b7d] mt-4 border-t border-dashed border-pink-200 pt-4 flex items-center">เรทราคาเพิ่มเติม <svg class="w-5 h-5 text-[#ff9eaa] ml-2" viewBox="0 0 24 24" fill="currentColor"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></h3>
+                            <p class="text-xs text-[#b07d89] mb-2">(หมายเหตุท้ายป้าย: คนที่เพิ่งใช้บริการจ่ายก่อนทุกกรณี)</p>
+                            <ul class="space-y-1 mb-4">
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>8501 – 9999</span> <span class="font-bold text-[#b86b7d]">145 B</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>10,000+</span> <span class="font-bold text-[#b86b7d]">1.9%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>14,000+</span> <span class="font-bold text-[#b86b7d]">2.5%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>19,000+</span> <span class="font-bold text-[#b86b7d]">3.5%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>30,000+</span> <span class="font-bold text-[#b86b7d]">4.5%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>50,000+</span> <span class="font-bold text-[#b86b7d]">4.7%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>70,000+</span> <span class="font-bold text-[#b86b7d]">5%</span>
+                                </li>
+                                <li class="flex justify-between items-center bg-[#fff0f3] p-2 rounded border border-[#ffdce3]">
+                                    <span>100,000</span> <span class="font-bold text-[#b86b7d]">5.5%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="white-window">
+                        <div class="window-header">
+                            <div class="flex gap-1.5 mr-auto">
+                                <div class="w-3 h-3 rounded-full bg-[#fbbce0]"></div>
+                                <div class="w-3 h-3 rounded-full border border-[#ffdce3] bg-white"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#fbbce0]"></div>
+                            </div>
+                            <span class="font-eng font-bold text-[#ff8fa3] tracking-widest text-xs">ID FINDING RATES</span>
+                        </div>
+                        <div class="p-5 font-mitr text-sm">
+                            <p class="font-bold mb-3 text-[#b86b7d] flex items-center"><svg class="w-5 h-5 text-yellow-500 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> รับบริการหาไอดีของร้าน Ta Ray</p>
+                            
+                            <div class="mb-4 text-center">
+                                <img src="IMG_0154.jpeg" alt="เรทราคาหาไอดี" class="w-full rounded-lg border-2 border-[#444] shadow-md object-cover">
+                            </div>
+
+                            <div class="mb-4">
+                                <span class="bg-[#ffe8d6] text-[#b5734c] px-2 py-1 rounded text-xs font-bold mb-2 inline-block">เรทราคา 1 - 6000</span>
+                                <div class="flex flex-wrap gap-1">
+                                    <a href="#" class="link-item">1 – 900 = 40 B</a>
+                                    <a href="#" class="link-item">901 – 1900 = 57 B</a>
+                                    <a href="#" class="link-item">1901 – 3500 = 75 B</a>
+                                    <a href="#" class="link-item">3501 – 6000 = 90 B</a>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <span class="bg-[#8c5a65] text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block">เรทราคา 6001 - 30,000</span>
+                                <div class="flex flex-wrap gap-1">
+                                    <a href="#" class="link-item">6001 – 9000 = 120 B</a>
+                                    <a href="#" class="link-item">9001 – 9,999 = 145 B</a>
+                                    <a href="#" class="link-item">10,000+++ = 170 B</a>
+                                    <a href="#" class="link-item">15,000+++ = 200 B</a>
+                                    <a href="#" class="link-item" style="display:none;">(Hidden)</a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="bg-[#ffb5c6] text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block">เรทราคา 30,000 ขึ้นไป</span>
+                                <div class="flex flex-wrap gap-1">
+                                    <a href="#" class="link-item">30,000+++ = 250 B</a>
+                                    <a href="#" class="link-item">50,000+++ = 275 B</a>
+                                    <a href="#" class="link-item">100,000+++ = 300 B</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    
+                    <div class="white-window">
+                        <div class="window-header">
+                            <div class="flex gap-1.5 mr-auto">
+                                <div class="w-3 h-3 rounded-full bg-pink-300"></div>
+                                <div class="w-3 h-3 rounded-full bg-rose-300"></div>
+                                <div class="w-3 h-3 rounded-full bg-orange-200"></div>
+                            </div>
+                            <span class="font-eng font-bold text-[#b86b7d] tracking-widest text-xs">QUEUE & PREPARATION</span>
+                        </div>
+                        <div class="p-5 font-mitr text-sm">
+                            <p class="text-center font-bold text-lg mb-4 bg-[#fff0f4] text-[#b86b7d] py-2 rounded-xl flex justify-center items-center"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zM11 18.49c-1.15-.4-2.75-.99-4.5-.99-1.3 0-2.85.2-4 .5V7.4c1.15-.4 2.75-.99 4.5-.99 1.3 0 2.85.2 4 .5v11.09z"/></svg> การเตรียมตัวฝากขาย</p>
+                            
+                            <div class="mb-5 border border-pink-200 bg-[#fffafb] rounded-xl p-3 shadow-sm">
+                                <h4 class="font-bold text-[#e07a8f] mb-1 flex items-center"><svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5,4C20.5,3.9 19.3,4 18.3,4.5C17,5.1 16,6.1 15.2,7.2C14.2,5.8 12.6,4.5 10.9,4.4C9.6,4.3 8.3,4.7 7.5,5.6C6.1,7.1 6,9.6 7,11.4L3.1,19.3C2.9,19.6 3,20.1 3.4,20.4C3.8,20.6 4.3,20.4 4.5,20.1L9,13C10,13.8 11.2,14.4 12.5,14.4C13.8,14.4 15,13.8 16,13L20.5,20.1C20.7,20.4 21.2,20.6 21.6,20.4C22,20.1 22.1,19.6 21.9,19.3L18,11.4C19,9.6 18.9,7.1 17.5,5.6C18.4,5 19.6,4.7 20.7,5.1C21.1,5.2 21.6,5 21.7,4.6C21.9,4.3 21.7,3.8 21.5,4Z"/></svg> รูปภาพที่ต้องเตรียม</h4>
+                                <ul class="text-xs text-[#8c5a65] mb-2 list-disc pl-4">
+                                    <li>สกิน เครื่องประดับ สัตว์เลี้ยง</li>
+                                    <li>ของในคลัง ยอดเติม</li>
+                                    <li>แรงค์ปัจจุบันของไอดี</li>
+                                </ul>
+                                <div class="flex justify-between items-center text-xs font-bold border-t border-dashed border-[#ffdce3] pt-2">
+                                    <span class="text-rose-600">สถานะ: จำเป็นต้องเตรียม</span>
+                                    <span class="text-[#d48c6a]">แคปให้ชัดเจน</span>
+                                </div>
+                                <div class="text-right text-xs font-bold text-pink-600 mt-1">พร้อมฟอร์มที่ต้องกรอก</div>
+                            </div>
+
+                            <div class="mb-5 border border-pink-200 bg-[#fffafb] rounded-xl p-3 shadow-sm">
+                                <h4 class="font-bold text-[#e07a8f] mb-1 flex items-center"><svg class="w-4 h-4 text-[#d48c6a] mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg> แบบฟอร์มการฝากขาย</h4>
+                                <ul class="text-xs text-[#8c5a65] mb-2 list-disc pl-4">
+                                    <li>ทางร้านจะมีแบบฟอร์มให้ลูกค้ากรอก</li>
+                                    <li>กรอกข้อมูลให้ครบถ้วนเพื่อความรวดเร็ว</li>
+                                    <li>หากไม่เข้าใจสามารถสอบถามได้</li>
+                                </ul>
+                                <div class="flex justify-between items-center text-xs font-bold border-t border-dashed border-[#ffdce3] pt-2">
+                                    <span class="text-rose-600">สถานะ: ขอได้ที่แชท</span>
+                                    <span class="text-[#d48c6a]">กรอกครบ = ลงไว</span>
+                                </div>
+                                <div class="text-right text-xs font-bold text-pink-600 mt-1">รับคิวทันทีหลังเสร็จสิ้น</div>
+                                <p class="text-[10px] text-[#b07d89] mt-1">*ควรใช้ข้อมูลจริงทั้งหมด</p>
+                            </div>
+
+                            <div class="border border-pink-200 bg-[#fffafb] rounded-xl p-3 shadow-sm">
+                                <h4 class="font-bold text-[#e07a8f] mb-1 flex items-center"><svg class="w-4 h-4 text-yellow-500 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg> เช็คคิวฝากขาย</h4>
+                                <ul class="text-xs text-[#8c5a65] mb-2 list-disc pl-4">
+                                    <li>สามารถตรวจสอบคิวงานได้ตลอดเวลา</li>
+                                    <li>ระบบอัปเดตแบบเรียลไทม์ผ่าน Google Docs</li>
+                                    <li>เข้าถึงได้จากทุกอุปกรณ์</li>
+                                </ul>
+                                <div class="flex justify-between items-center text-xs font-bold border-t border-dashed border-[#ffdce3] pt-2">
+                                    <span class="text-rose-600">สถานะ: ออนไลน์</span>
+                                    <span class="text-[#d48c6a]">อัปเดตตลอด</span>
+                                </div>
+                                <div class="text-right text-xs font-bold text-pink-600 mt-1">
+                                    <a href="https://docs.google.com/spreadsheets/d/1-kKlNjdrTLPbQ0ogYQt7Fb-QtCoLyMmX0H57NfEOMwA/edit?usp=drivesdk" target="_blank" style="text-decoration: underline;">คลิกเพื่อเช็คคิวที่นี่</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="white-window">
+                        <div class="window-header">
+                            <div class="flex gap-1.5 mr-auto">
+                                <div class="w-3 h-3 rounded-full bg-gray-200"></div>
+                                <div class="w-3 h-3 rounded-full bg-gray-200"></div>
+                                <div class="w-3 h-3 rounded-full bg-gray-200"></div>
+                            </div>
+                            <span class="font-eng font-bold text-[#b07d89] tracking-widest text-xs">HOW TO ORDER & FAQ</span>
+                        </div>
+                        <div class="p-5 font-mitr text-sm">
+                            <h3 class="font-bold text-[#b86b7d] mb-2 flex items-center"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg> ขั้นตอนการสั่งซื้อ</h3>
+                            <ul class="text-xs text-[#8c5a65] space-y-1 mb-4">
+                                <li>1. ทักแชทแจ้งความต้องการ (หาไอดี / ฝากขาย / ทำป้ายเรท)</li>
+                                <li>2. ส่งรายละเอียดตามบรีฟ ฟอร์ม หรือรูปภาพที่ต้องใช้ทำป้าย</li>
+                                <li>3. ชำระเงินตามเรทราคาที่ตกลง (ชำระก่อนเริ่มงาน)</li>
+                                <li>4. รอรับคิวและงานตามกำหนด เช็คคิวผ่านเว็บได้เลยครับ</li>
+                            </ul>
+
+                            <div class="bg-red-50 text-red-600 p-2 rounded text-xs mb-4 border border-red-100">
+                                <strong><svg class="w-4 h-4 inline-block text-red-500 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> กฎของร้าน:</strong> หากทางร้านเริ่มดำเนินการไปแล้ว จะไม่สามารถขอคืนเงินได้ในทุกกรณีครับ
+                            </div>
+
+                            <h3 class="font-bold text-[#b86b7d] mb-2 mt-4 border-t border-dashed border-pink-200 pt-4 flex items-center">
+                                <span class="inline-flex items-center gap-1 mr-2">
+                                    <svg class="w-5 h-5 text-[#ffb5c6]" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                                    <svg class="w-4 h-4 text-[#ff9eaa]" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5,4C20.5,3.9 19.3,4 18.3,4.5C17,5.1 16,6.1 15.2,7.2C14.2,5.8 12.6,4.5 10.9,4.4C9.6,4.3 8.3,4.7 7.5,5.6C6.1,7.1 6,9.6 7,11.4L3.1,19.3C2.9,19.6 3,20.1 3.4,20.4C3.8,20.6 4.3,20.4 4.5,20.1L9,13C10,13.8 11.2,14.4 12.5,14.4C13.8,14.4 15,13.8 16,13L20.5,20.1C20.7,20.4 21.2,20.6 21.6,20.4C22,20.1 22.1,19.6 21.9,19.3L18,11.4C19,9.6 18.9,7.1 17.5,5.6C18.4,5 19.6,4.7 20.7,5.1C21.1,5.2 21.6,5 21.7,4.6C21.9,4.3 21.7,3.8 21.5,4Z"/></svg>
+                                </span> 
+                                FAQ คำถามที่พบบ่อย
+                            </h3>
+                            <p class="text-xs text-[#8c5a65] mb-2">
+                                <strong>Q: รับงานด่วนไหมครับ?</strong><br>
+                                A: ทักมาสอบถามคิวงานก่อนได้ครับ หากคิวไม่เยอะลัดให้ฟรี<br><br>
+                                <strong>Q: มีประกันหลังการขายไหม?</strong><br>
+                                A: หากเกิดข้อผิดพลาดจากทางร้าน แก้ไขให้ฟรีทันทีครับ
+                            </p>
+                            <div class="flex flex-col gap-2 mt-3">
+                                <a href="https://docs.google.com/spreadsheets/d/1-kKlNjdrTLPbQ0ogYQt7Fb-QtCoLyMmX0H57NfEOMwA/edit?usp=drivesdk" target="_blank" class="text-xs text-center bg-[#ffe8d6] text-[#b5734c] py-2 rounded-lg font-bold hover:bg-[#ffcdb2] transition-colors flex items-center justify-center border border-[#ffcdb2]"><svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> เช็คคิวงานคลิกที่นี่</a>
+                                <a href="#" class="text-xs text-center bg-rose-100 text-rose-700 py-2 rounded-lg font-bold hover:bg-rose-200 transition-colors flex items-center justify-center border border-rose-200" style="display:none;"><svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> (ปุ่มสำรอง-ซ่อนไว้)</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-8 text-center pt-6 border-t border-white/60 relative z-10">
+                <h3 class="font-eng font-bold text-[#8c5a65] mb-4 tracking-widest text-sm uppercase drop-shadow-sm">Contact Us</h3>
+                <div class="flex flex-wrap justify-center gap-4 font-mitr">
+                    <a href="https://www.facebook.com/share/1HXq3wncat/?mibextid=wwXIfr" target="_blank" class="contact-btn">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                        Facebook
+                    </a>
+                    <a href="#" target="_blank" class="contact-btn" style="display:none;">
+                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.114.281.072.717.035.993l-.222 1.341c-.029.176-.135.856.751.482.886-.374 4.781-2.822 6.6-4.831 1.066-1.163 1.743-2.61 1.743-4.185zm-15.068 3.513c-.139 0-.251-.112-.251-.25v-4.155c0-.138.112-.251.251-.251h3.185c.138 0 .25.113.25.25v.784c0 .139-.112.251-.25.25h-2.15v.785h2.15c.138 0 .25.112.25.25v.784c0 .139-.112.25-.25.25h-2.15v.802h2.15c.138 0 .25.113.25.251v.784c0 .138-.112.25-.25.25h-3.185zm5.409 0c-.139 0-.251-.112-.251-.25v-4.155c0-.138.112-.251.251-.251h1.036c.138 0 .25.113.25.251v4.155c0 .138-.112.25-.25.25h-1.036zm5.83-4.155c0-.138.113-.251.251-.251h1.035c.138 0 .25.113.25.251v2.545l2.008-2.684c.061-.082.157-.129.257-.129h1.023c.174 0 .285.176.208.324l-2.484 3.32v.774c0 .138-.112.25-.25.25h-1.036c-.138 0-.25-.112-.25-.25v-2.316l-2.025 2.706c-.062.082-.158.129-.258.129h-.977c-.174 0-.285-.175-.208-.323l2.457-3.282v-.812c0-.138-.112-.25-.25-.25h-1.036z"/></svg>
+                        Line
+                    </a>
+                    <a href="#" target="_blank" class="contact-btn" style="display:none;">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram
+                    </a>
+                </div>
+                <p class="mt-4 text-xs opacity-70 text-[#b07d89]">ขอบคุณที่ไว้วางใจ TA RAY ♡</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
